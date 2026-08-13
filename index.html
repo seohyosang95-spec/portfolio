@@ -1,0 +1,137 @@
+HTML
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>서효상 | 정보보안 포트폴리오</title>
+    <style>
+        :root { --bg: #0f172a; --card: #1e293b; --text: #f8fafc; --muted: #94a3b8; --accent: #38bdf8; }
+        body { font-family: 'Pretendard', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; margin: 0; padding: 30px 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1, h2, h3 { color: var(--accent); }
+        h1 { text-align: center; font-size: 2.2rem; margin-bottom: 30px; }
+        h2 { border-left: 4px solid var(--accent); padding-left: 12px; margin-top: 40px; font-size: 1.4rem; }
+        .card { background: var(--card); padding: 24px; border-radius: 12px; margin-top: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        ul { padding-left: 20px; margin: 10px 0; }
+        li { margin-bottom: 6px; }
+        .badge { display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent); padding: 4px 10px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; }
+        .footer { text-align: center; margin-top: 50px; font-size: 0.85rem; color: var(--muted); }
+        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>나만의 포트폴리오</h1>
+    
+    <section>
+        <h2>한 줄 소개</h2>
+        <div class="card">
+            <p><strong>안녕하세요, 서효상입니다.</strong><br>
+            탐지–분석–대응을 끝까지 책임지는 보안 실무형 인재로 성장해 정보보안 분야의 최고가 되고자 합니다.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>기술 스택</h2>
+        <div class="card">
+            <p>현재는 보안/컴퓨터 관련 실무 기술을 학습 중이며, 기초부터 체계적으로 쌓아가는 단계입니다.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>온라인 포트폴리오 완성 (과제 기록)</h2>
+        <div class="card">
+            <span class="badge">대상 문장</span>
+            <p>이 페이지는 채용 담당자/현업 멘토에게 보안관제(SOC) 직무로 전향하기 위한 제 강점과 준비 과정을 보여주기 위한 것이다.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>공개 / 비공개 점검표</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>[공개할 것]</h3>
+                <ul>
+                    <li>병원 근무 6년에서 나온 책임감·배려·기록 습관</li>
+                    <li>보안관제 목표와 학습/준비 과정 (주간 학습 로그, 시나리오 리포트 등)</li>
+                    <li>공개 가능한 근거 1개 (개인 노션 공개 페이지/문서 링크 등)</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>[공개하지 않을 것]</h3>
+                <ul>
+                    <li>주소/상세 근무지/환자 관련 정보 등 민감정보</li>
+                    <li>비밀번호·토큰·API 키 등 비밀값</li>
+                    <li>개인 연락처 (전화번호/개인 이메일)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>대표 프로젝트</h2>
+        <div class="card">
+            <span class="badge">Project 01</span>
+            <h3>로그 기반 이상행위 탐지 미니 프로젝트 (Windows 이벤트 로그)</h3>
+            <p><strong>기간:</strong> 2026.06 (2주) | <strong>역할:</strong> 환경 구성, 로그 수집/정리, 룰 작성, 테스트, 문서화 (개인 100%)</p>
+            <p><strong>기술:</strong> Windows Event Log, Sysmon, PowerShell, Excel/Google Sheets, Markdown/Notion</p>
+            <ul>
+                <li><strong>진행 방식:</strong> 이벤트 로그 수집 항목 선정 → 의심 기준 룰 5~8개 작성 → 테스트 시나리오 6~10개 검증 → 케이스 리포트 2건 작성</li>
+                <li><strong>성과 및 해결:</strong> 룰 8개 및 테스트 10건 수행, 관심 이벤트 ID 중심 필터링으로 오탐 감소</li>
+            </ul>
+        </div>
+        <div class="card">
+            <span class="badge">Project 02</span>
+            <h3>취약점 진단 → 재현 → 개선안 → 재점검 리포트 (실습 서버/VM)</h3>
+            <p><strong>기간:</strong> 2026.07 (2주) | <strong>역할:</strong> 진단 범위 설정, 스캔/검증, 위험도 분류, 개선안 작성, 재점검 (개인 100%)</p>
+            <p><strong>기술:</strong> Nmap, OpenVAS, Linux 기본 설정, OWASP Top10 개념, CVSS 기초</p>
+            <ul>
+                <li><strong>진행 방식:</strong> 대상 자산 목록화 → High/Medium/Low 리스크 분류 → 재현 절차 스크린샷 기록 → 개선안 적용 및 재점검</li>
+                <li><strong>성과 및 해결:</strong> High 2건 발견 및 조치 후 재점검 완료(0건), 영향도·악용 가능성 기준 우선순위 정립</li>
+            </ul>
+        </div>
+        <div class="card">
+            <span class="badge">Project 03</span>
+            <h3>네트워크 트래픽 분석 케이스 스터디 (Wireshark)</h3>
+            <p><strong>기간:</strong> 2026.08 (1주) | <strong>역할:</strong> 시나리오 구성, 캡처/필터링, 증거 수집, IOC 정리, 보고서 작성 (개인 100%)</p>
+            <p><strong>기술:</strong> Wireshark, DNS/HTTP 기본, tcpdump, Zeek</p>
+            <ul>
+                <li><strong>진행 방식:</strong> 트래픽 캡처 후 필터링 → 비정상 도메인 및 수상한 User-Agent 등 의심 지표 기반 증거 수집 → IOC 목록화</li>
+                <li><strong>성과 및 해결:</strong> 케이스 2건 분석 및 IOC 10개 추출, 타임라인 표와 체크리스트로 근거 중심 결론 도출</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>경력 및 보안 강점</h2>
+        <div class="card">
+            <h3>간호조무사 (6년)</h3>
+            <p><strong>기간:</strong> 2019.XX ~ 2025.XX (총 6년) ※ 정확한 기간 추후 수정</p>
+            <ul>
+                <li><strong>민감정보 취급:</strong> 환자 정보 및 의료 관련 자료 다루며 개인정보 보호 체득</li>
+                <li><strong>기록/증거 중심 습관:</strong> 누락·오류 방지를 위한 체크리스트 활용 (관제의 '로그 기반 판단'과 연계)</li>
+                <li><strong>상황 대응 및 협업:</strong> 급박한 상황 속 우선순위 판단 및 동료와의 빠른 공유</li>
+                <li><strong>성과:</strong> 오류 없는 일일 업무 처리 및 체크리스트 도입으로 인수인계 품질 향상</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>자기소개 (요약)</h2>
+        <div class="card">
+            <ul>
+                <li><strong>어떤 사람인지:</strong> 사용자 경험과 유지보수를 동시에 챙깁니다.</li>
+                <li><strong>일하는 방식:</strong> 작은 단위로 쪼개서 빠르게 검증합니다.</li>
+                <li><strong>성장 방향:</strong> 성능/접근성/아키텍처를 고려합니다.</li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="footer">
+        <p>&copy; 2026 Seo Hyosang. All rights reserved.</p>
+    </div>
+</div>
+</body>
+</html>
