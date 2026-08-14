@@ -1,86 +1,259 @@
+HTML
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>서효상 | SOC 보안관제 포트폴리오</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --card-border: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-color: #10b981; /* Emerald Green */
+            --accent-blue: #38bdf8;
+            --font-main: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 3rem 1rem;
+            border-bottom: 1px solid var(--card-border);
+            margin-bottom: 2.5rem;
+        }
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        /* Section */
+        section {
+            margin-bottom: 3rem;
+        }
+        h2 {
+            font-size: 1.4rem;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 0.75rem;
+            margin-bottom: 1.25rem;
+            color: var(--text-primary);
+        }
+
+        /* Grid Cards */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        .card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+
+        /* STAR Details styling */
+        details summary {
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        details summary::-webkit-details-marker { display: none; }
+        details summary::after {
+            content: "＋";
+            color: var(--accent-blue);
+        }
+        details[open] summary::after {
+            content: "－";
+        }
+        .star-content {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--card-border);
+            font-size: 0.95rem;
+        }
+        .star-tag {
+            font-weight: bold;
+            color: var(--accent-blue);
+            margin-right: 0.5rem;
+        }
+
+        /* Table Design */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--card-border);
+            font-size: 0.9rem;
+        }
+        th {
+            background-color: #1e293b;
+            color: var(--text-secondary);
+        }
+
+        /* Button */
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: #000;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .btn:hover { opacity: 0.9; }
+
+        footer {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--card-border);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">SOC Security Analyst Portfolio</span>
+        <h1>서효상 | 정보보안 포트폴리오</h1>
+        <p>탐지–분석–대응을 끝까지 책임지는 보안 실무형 인재</p>
+    </header>
+
+    <section>
+        <h2>핵심 역량 (Core Strengths)</h2>
+        <div class="grid">
+            <details class="card">
+                <summary>1. 정확성 기반의 기록 습관</summary>
+                <div class="star-content">
+                    <p><span class="star-tag">S</span> 6년간 병원 근무 시 의료 기록/인수인계 오류 위험 존재</p>
+                    <p><span class="star-tag">A</span> 교대 점검 체크리스트 직접 서식화 및 이중 점검 체계 정착</p>
+                    <p><span class="star-tag">R</span> 6년 연속 의료 기록 오류 0건 달성</p>
+                </div>
+            </details>
+
+            <details class="card">
+                <summary>2. 이상징후 빠른 탐지 & 대응</summary>
+                <div class="star-content">
+                    <p><span class="star-tag">S</span> 환자 상태 변화 시 골든타임 내 빠른 대응 필요</p>
+                    <p><span class="star-tag">A</span> 미세 수치 변화 감지 시 즉각 기록 후 담당진에게 핵심 전달</p>
+                    <p><span class="star-tag">R</span> 초기 골든타임 확보 및 안전한 응급 처치 지원</p>
+                </div>
+            </details>
+
+            <details class="card">
+                <summary>3. 침착한 우선순위 판단</summary>
+                <div class="star-content">
+                    <p><span class="star-tag">S</span> 다수의 응급 요청이 동시 다발적으로 몰리는 과부하 발생</p>
+                    <p><span class="star-tag">A</span> 중증도·응급도 기준으로 즉시 순위 정렬 후 차분히 순차 처리</p>
+                    <p><span class="star-tag">R</span> 누락 없는 실시간 응급 처리 및 업무 효율 향상</p>
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <section>
+        <h2>SOC 직무 준비 과정</h2>
+        <div class="card">
+            <ul style="list-style: none; line-height: 2;">
+                <li>✔️ <strong>SIEM / 로그 분석:</strong> Windows 이벤트 로그 수집 및 8개 탐지 룰(Detection Rule) 작성</li>
+                <li>✔️ <strong>취약점 진단:</strong> OpenVAS 및 Nmap을 활용한 자산 진단 및 조치 리포트 작성</li>
+                <li>✔️ <strong>패킷 분석:</strong> Wireshark를 이용한 네트워크 패킷 분석 및 IOC 추출</li>
+            </ul>
+            <br>
+            <a href="https://notion.so" target="_blank" class="btn">학습 & 시나리오 리포트 (Notion)</a>
+        </div>
+    </section>
+
+    <section>
+        <h2>자체 점검 & 품질 관리 (QA)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>점검 항목</th>
+                    <th>수행 내용</th>
+                    <th>결과</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>보안 / 개인정보</strong></td>
+                    <td>API 키, 비밀번호 및 개인 연락처 비공개 처리</td>
+                    <td>✅ 통과</td>
+                </tr>
+                <tr>
+                    <td><strong>웹 접근성 (a11y)</strong></td>
+                    <td>키보드(Tab/Enter) 조작 완벽 대응 및 과도한 효과 제거</td>
+                    <td>✅ 통과</td>
+                </tr>
+                <tr>
+                    <td><strong>반응형 레이아웃</strong></td>
+                    <td>Desktop / Mobile 해상도 가로 넘침 0건 확인</td>
+                    <td>✅ 통과</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <p>© 2026 Seo Hyosang. All rights reserved.</p>
+    </footer>
+</div>
+
+</body>
+</html>
 
 
-
-# 서효상 포트폴리오 (자체 점검 및 제출 보고서)
-
-## 1. 기본 정보 및 공개/비공개 점검
-* **대상 문장:** 사용자 친화적인 웹 인터페이스와 접근성을 고려하여 제작한 서효상의 포트폴리오입니다.
-* **공개 주소:** https://seohyosang95-spec.github.io/portfolio/
-
-| 구 분 | 항목 내용 | 점검 결과 |
-| :--- | :--- | :---: |
-| **개인정보** | 주소, 전화번호, 개인 이메일 등 비공개 정보 노출 여부 | **0건 (비공개 완료)** |
-| **보안/비밀값** | 비밀번호, API Key, Token 등 노출 여부 | **0건 (비공개 완료)** |
-| **공개 근거** | 강점/취향 관련 작성물 및 결과 링크 연결 | **1건 이상 연결 완료** |
-
-> 📁 **학생 자체 점검 파일:** `대상_문장_및_공개_비공개_범위_점검표.pdf`
-
----
-
-## 2. 강점 및 취향 (Situation - Action - Result)
-
-| 구분 | 상황 (Situation) | 행동 (Action) | 결과 (Result) | 공개 가능 근거 연결 |
-| :---: | :--- | :--- | :--- | :--- |
-| **01** | 다양한 브라우저 환경에서 레이아웃이 깨지는 문제가 발생함 | CSS Flexbox와 Grid를 활용해 반응형 레이아웃을 전면 재설계함 | 1366x768, 1920x1080 등 다양한 해상도에서 가로 넘침 0건 달성 | [공개 근거 보기](https://seohyosang95-spec.github.io/portfolio/) |
-| **02** | 키보드 사용자의 웹 접근성이 고려되지 않아 탭 이동이 불가능함 | 모든 버튼 및 상호작용 요소에 `tabindex`와 Focus Style을 적용함 | 마우스 없이 키보드만으로 모든 상호작용 완벽 제어 가능 | *(개인정보 제거 완료)* |
-| **03** | 화면 내 과도한 애니메이션으로 인한 시각적 피로도 증가 | `prefers-reduced-motion` 미디어 쿼리를 적용하여 애니메이션 토글 기능 구현 | 사용자 설정에 따라 큰 움직임을 끄거나 줄일 수 있도록 개선 | *(개인정보 제거 완료)* |
-
-> 📁 **학생 자체 점검 파일:** `세_칸으로_정리한_강점_이나_취향_3개.png`, `개인정보를_제거한_근거_1개_또는_결과_문장.png`
-
----
-
-## 3. 해상도 및 가로 넘침 점검 (반응형)
-* **핵심 요소 3개:** ① 메인 프로필/소개 영역 ② 프로젝트 카드 목록 ③ 상호작용 버튼 및 메뉴
-* **가로 넘침 현상:** 0건 (문서 전체 및 주요 영역 넘침 없음)
-
-| 해상도 | 점검 항목 | 결과 | 첨부 증거 파일명 |
-| :---: | :--- | :---: | :--- |
-| **1366 × 768** | 스크롤 없이 핵심 3개 노출 및 가로 넘침 0건 | **통과** | `1366x768_수정_후_화면_파일.png` |
-| **1920 × 1080** | 스크롤 없이 핵심 3개 노출 및 가로 넘침 0건 | **통과** | `1920x1080_수정_후_화면_파일과_가로_넘침_확인_기록.png` |
-
----
-
-## 4. 결함 수정 및 콘솔 오류 점검
-
-* **브라우저 콘솔 오류 (Red Error):** **0건** 확인 완료 (`콘솔_오류_0건_확인_화면_파일.png`)
-
-### ■ 결함 수정 전·후 목록 (3건 이상)
-1. **결함 1:** 특정 해상도에서 메인 카드가 화면 밖으로 삐져나가는 가로 넘침 발생 $\rightarrow$ **[수정 완료]** `max-width: 100%` 및 `box-sizing: border-box` 적용으로 가로 넘침 0건으로 해결.
-2. **결함 2:** 키보드 `Tab` 키 이동 시 현재 위치를 알 수 있는 포커스 링이 보이지 않음 $\rightarrow$ **[수정 완료]** `:focus-visible` 스타일을 추가하여 키보드 접근성 확보.
-3. **결함 3:** 모바일/작은 해상도에서 일부 상호작용 버튼 클릭 영역이 겹치는 현상 $\rightarrow$ **[수정 완료]** 버튼 간 간격(Margin/Padding)을 조정하여 독립적 클릭 가능하도록 수정.
-
-> 📁 **학생 자체 점검 파일:** `결함_3개_이상_수정_전후_목록.pdf`
-
----
-
-## 5. 상호작용 및 접근성 점검
-
-* **상호작용 내용:** 메인 포트폴리오의 프로젝트 상세보기/토글 버튼 동작
-* **마우스/키보드 양쪽 검사:** 
-  * 마우스 클릭 시 상호작용 정상 동작
-  * 키보드 `Tab` 키로 버튼 이동 후 `Enter` / `Space` 키로 실행 가능
-* **움직임 제어:** 화면 내 큰 효과나 애니메이션을 끄거나 줄일 수 있는 옵션/미디어 쿼리 제공
-
-> 📁 **학생 자체 점검 파일:** `상호작용_동작_화면_파일_또는_짧은_화면_기록.mp4`, `마우스_키보드_양쪽_검사_결과.png`
-
----
-
-## 📋 검증 안내서 (제출 화면 배치용)
-
-1. **어디로 가나요:** https://seohyosang95-spec.github.io/portfolio/
-2. **무엇을 하나요 (3단계 이내 / 30초 내 검증):**
-   * **1단계:** 공개 주소(`https://seohyosang95-spec.github.io/portfolio/`)에 접속합니다.
-   * **2단계:** 화면 중앙의 [상호작용 버튼/프로젝트 카드]를 마우스로 클릭하거나 키보드(`Tab` 후 `Enter`)로 눌러봅니다.
-   * **3단계:** 상호작용 결과 창(상세 내용/변화)이 정상적으로 노출되는지 확인합니다.
-3. **무엇이 보이면 통과인가요:** 
-   * 스크롤 없이 핵심 3개 요소가 한눈에 보이고, 가로 스크롤(넘침)이 생기지 않으며, 버튼 클릭/키보드 동작 시 해당 상호작용 결과가 즉시 화면에 나타나면 통과입니다.
-4. **안 될 때:** 
-   * 브라우저 새로고침(`F5`)을 시도하거나, 시크릿 창 또는 다른 브라우저(Chrome/Edge 등)에서 재접속합니다.
-
----
-
-## 🤖 AI 사용 및 본인 판단 기록 (3줄 요약)
-
-1. **AI에게 맡긴 일:** 반응형 레이아웃 가로 넘침 방지를 위한 CSS 속성 제안 및 검증 안내서 양식 기획
-2. **내가 판단한 일:** 제시된 웹 접근성 가이드라인 중 포트폴리오 구조에 맞는 필수 항목만 선별하여 실제 코드 적용 및 검증 진행
-3. **AI 말을 안 들은 일:** AI가 추천한 복잡한 3D 애니메이션 효과는 사용자의 시각적 피로도를 낮추고 로딩 속도를 최적화하기 위해 채택하지 않고 심플한 CSS 전환 효과로 대체함
