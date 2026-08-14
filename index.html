@@ -19,10 +19,17 @@ HTML
         li { margin-bottom: 6px; }
         .badge { display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent); padding: 4px 10px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; }
         
-        /* STAR 표 스타일 */
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.9rem; }
-        th, td { border: 1px solid #334155; padding: 10px; text-align: left; }
-        th { background-color: #0f172a; color: var(--accent); }
+        /* 접기/펼치기 접이식 카드(Accordion) 스타일 */
+        details.strength-card { background: var(--card); border-radius: 12px; margin-top: 12px; border: 1px solid #334155; overflow: hidden; }
+        details.strength-card summary { padding: 16px 20px; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; user-select: none; color: var(--accent); }
+        details.strength-card summary::-webkit-details-marker { display: none; }
+        details.strength-card summary:hover, details.strength-card summary:focus { background-color: rgba(56, 189, 248, 0.08); outline: none; }
+        details.strength-card summary::after { content: '▼'; font-size: 0.8rem; transition: transform 0.2s; color: var(--muted); }
+        details[open].strength-card summary::after { transform: rotate(180deg); }
+        .star-box { padding: 15px 20px; border-top: 1px solid #334155; background: #162032; font-size: 0.95rem; }
+        .star-item { margin-bottom: 10px; }
+        .star-item:last-child { margin-bottom: 0; }
+        .star-label { font-weight: bold; color: var(--accent); display: inline-block; width: 110px; }
 
         /* 상호작용 버튼 및 모달 스타일 */
         .btn { background: var(--accent); color: #000; border: none; padding: 10px 16px; border-radius: 6px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
@@ -71,39 +78,37 @@ HTML
     </section>
 
     <section>
-        <h2>핵심 강점 3가지 (상황 · 행동 · 결과)</h2>
-        <div class="card">
-            <table>
-                <thead>
-                    <tr>
-                        <th>강점 항목</th>
-                        <th>상황 (Situation)</th>
-                        <th>행동 (Action)</th>
-                        <th>결과 (Result)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>1. 기록 습관 & 정확성</strong></td>
-                        <td>병원 근무 6년간 수많은 환자 처방 및 인수·인계 진행 시 오류 위험 존재</td>
-                        <td>업무 누락 방지를 위해 일일 교대 점검 체크리스트 서식을 직접 작성 및 교대 시 이중 확인</td>
-                        <td>6년간 의료 기록 오류 0건 유지 및 팀 내 인수인계 신뢰도 상승</td>
-                    </tr>
-                    <tr>
-                        <td><strong>2. 이상징후 탐지 및 빠른 대응</strong></td>
-                        <td>응급 환자 상태 변화 시 즉각적인 원인 파악 및 유관 부서 전달 필요</td>
-                        <td>환자 생체 수치 및 미세한 이상징후 감지 즉시 기록하고 담당 의료진에게 핵심 요약 전달</td>
-                        <td>초기 골든타임 확보로 응급 상황 안전하게 처리</td>
-                    </tr>
-                    <tr>
-                        <td><strong>3. 침착한 우선순위 판단</strong></td>
-                        <td>동시에 여러 업무 요청이 몰리는 과부하 상황 발생</td>
-                        <td>환자 중증도 및 응급도 기준에 따라 업무 순서를 즉시 정렬하고 차분하게 순차 처리</td>
-                        <td>누락 없는 실시간 응급 업무 완료 및 업무 효율 향상</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <h2>핵심 강점 3가지 (접기 / 펼치기 카드)</h2>
+        
+        <!-- 카드 1 -->
+        <details class="strength-card">
+            <summary>강점 1. 기록 습관 & 정확성</summary>
+            <div class="star-box">
+                <div class="star-item"><span class="star-label">📍 상황 (S):</span> 병원 근무 6년간 수많은 환자 처방 및 인수·인계 진행 시 오류 위험 존재</div>
+                <div class="star-item"><span class="star-label">⚡ 행동 (A):</span> 업무 누락 방지를 위해 일일 교대 점검 체크리스트 서식을 직접 작성 및 교대 시 이중 확인</div>
+                <div class="star-item"><span class="star-label">🎯 결과 (R):</span> 6년간 의료 기록 오류 0건 유지 및 팀 내 인수인계 신뢰도 상승</div>
+            </div>
+        </details>
+
+        <!-- 카드 2 -->
+        <details class="strength-card">
+            <summary>강점 2. 이상징후 탐지 및 빠른 대응</summary>
+            <div class="star-box">
+                <div class="star-item"><span class="star-label">📍 상황 (S):</span> 응급 환자 상태 변화 시 즉각적인 원인 파악 및 유관 부서 전달 필요</div>
+                <div class="star-item"><span class="star-label">⚡ 행동 (A):</span> 환자 생체 수치 및 미세한 이상징후 감지 즉시 기록하고 담당 의료진에게 핵심 요약 전달</div>
+                <div class="star-item"><span class="star-label">🎯 결과 (R):</span> 초기 골든타임 확보로 응급 상황 안전하게 처리</div>
+            </div>
+        </details>
+
+        <!-- 카드 3 -->
+        <details class="strength-card">
+            <summary>강점 3. 침착한 우선순위 판단</summary>
+            <div class="star-box">
+                <div class="star-item"><span class="star-label">📍 상황 (S):</span> 동시에 여러 업무 요청이 몰리는 과부하 상황 발생</div>
+                <div class="star-item"><span class="star-label">⚡ 행동 (A):</span> 환자 중증도 및 응급도 기준에 따라 업무 순서를 즉시 정렬하고 차분하게 순차 처리</div>
+                <div class="star-item"><span class="star-label">🎯 결과 (R):</span> 누락 없는 실시간 응급 업무 완료 및 업무 효율 향상</div>
+            </div>
+        </details>
     </section>
 
     <section>
@@ -111,7 +116,7 @@ HTML
         <div class="card">
             <p>학습 과정 및 프로젝트 성과물을 정리한 노션 문서입니다.</p>
             <p>🔗 <strong>공개 근거 링크:</strong> 
-               <a href="https://app.notion.com/p/3badb5dd9cd480d9824dcfd34021d589?source=copy_link" target="_blank" style="color: var(--accent);">[서효상 보안 학습 & 시나리오 리포트 노션 보러가기]</a>
+               <a href="https://notion.so" target="_blank" style="color: var(--accent);">[서효상 보안 학습 & 시나리오 리포트 노션 보러가기]</a>
             </p>
         </div>
     </section>
@@ -140,8 +145,8 @@ HTML
         <div class="card">
             <ul>
                 <li><strong>어디로 가나요:</strong> 배포된 공개 주소 페이지 접속</li>
-                <li><strong>무엇을 하나요:</strong> '상호작용' 구역의 [보안관제 준비 과정 상세 보기] 버튼을 클릭(또는 키보드 Enter)합니다.</li>
-                <li><strong>무엇이 보이면 통과인가요:</strong> 팝업창이 뜨며 상세 학습 내용이 보이고, [닫기] 버튼으로 끌 수 있으면 통과입니다.</li>
+                <li><strong>무엇을 하나요:</strong> '핵심 강점 3가지' 카드를 클릭하거나, '상호작용' 구역의 [보안관제 준비 과정 상세 보기] 버튼을 클릭(또는 키보드 Enter)합니다.</li>
+                <li><strong>무엇이 보이면 통과인가요:</strong> 강점 카드가 접히고 펼쳐지며 내용이 보이고, 팝업창이 뜨며 상세 학습 내용이 보이고 [닫기] 버튼으로 끌 수 있으면 통과입니다.</li>
                 <li><strong>안 될 때:</strong> 브라우저의 자바스크립트 허용 여부를 확인하거나 페이지를 새로고침합니다.</li>
             </ul>
         </div>
@@ -150,7 +155,7 @@ HTML
     <section>
         <h2>AI 활용 소회</h2>
         <div class="card">
-            <p><strong>AI에게 맡긴 일:</strong> HTML/CSS 기본 레이아웃과 접근성(키보드 동작) 모달 자바스크립트 코드 생성을 맡겼다.</p>
+            <p><strong>AI에게 맡긴 일:</strong> HTML/CSS 기본 레이아웃 및 접기/펼치기 카드(details)와 접근성 모달 자바스크립트 코드 생성을 맡겼다.</p>
             <p><strong>내가 판단한 일:</strong> 보안관제 직무 특성에 맞춰 병원 경력의 강점을 STAR 구조로 직접 구성하고 개인정보 항목을 검토했다.</p>
             <p><strong>AI 말을 안 들은 일:</strong> AI가 제안한 과도한 애니메이션 효과는 시선 분산을 막기 위해 모두 제거했다.</p>
         </div>
