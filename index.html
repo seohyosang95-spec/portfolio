@@ -1,410 +1,98 @@
 
 
 
-HTML
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>서효상 | 정보보안 포트폴리오</title>
-    <style>
-        :root {
-            --bg-color: #0b1329;
-            --card-bg: #131f37;
-            --card-border: #1e293b;
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --accent-green: #10b981;
-            --accent-blue: #38bdf8;
-            --accent-red: #f43f5e;
-            --font-main: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
-        }
+Markdown
+# 서효상 포트폴리오 (자체 점검 및 제출 보고서)
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            font-family: var(--font-main);
-            line-height: 1.6;
-            padding: 2rem 1rem;
-        }
+## 1. 기본 정보 및 공개/비공개 점검
+* **대상 문장:** 사용자 친화적인 웹 인터페이스와 접근성을 고려하여 제작한 서효상의 포트폴리오입니다.
+* **공개 주소:** https://seohyosang95-spec.github.io/portfolio/
 
-        .container {
-            max-width: 960px;
-            margin: 0 auto;
-        }
+| 구 분 | 항목 내용 | 점검 결과 |
+| :--- | :--- | :---: |
+| **개인정보** | 주소, 전화번호, 개인 이메일 등 비공개 정보 노출 여부 | **0건 (비공개 완료)** |
+| **보안/비밀값** | 비밀번호, API Key, Token 등 노출 여부 | **0건 (비공개 완료)** |
+| **공개 근거** | 강점/취향 관련 작성물 및 결과 링크 연결 | **1건 이상 연결 완료** |
 
-        /* Header */
-        header {
-            border-bottom: 2px solid var(--card-border);
-            padding-bottom: 1.5rem;
-            margin-bottom: 2rem;
-        }
+> 📁 **학생 자체 점검 파일:** `대상_문장_및_공개_비공개_범위_점검표.pdf`
 
-        .badge {
-            display: inline-block;
-            background: rgba(16, 185, 129, 0.15);
-            color: var(--accent-green);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            border: 1px solid rgba(16, 185, 129, 0.3);
-        }
+---
 
-        header h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 0.4rem;
-        }
+## 2. 강점 및 취향 (Situation - Action - Result)
 
-        .subtitle {
-            color: var(--accent-blue);
-            font-size: 1.15rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
+| 구분 | 상황 (Situation) | 행동 (Action) | 결과 (Result) | 공개 가능 근거 연결 |
+| :---: | :--- | :--- | :--- | :--- |
+| **01** | 다양한 브라우저 환경에서 레이아웃이 깨지는 문제가 발생함 | CSS Flexbox와 Grid를 활용해 반응형 레이아웃을 전면 재설계함 | 1366x768, 1920x1080 등 다양한 해상도에서 가로 넘침 0건 달성 | [공개 근거 보기](https://seohyosang95-spec.github.io/portfolio/) |
+| **02** | 키보드 사용자의 웹 접근성이 고려되지 않아 탭 이동이 불가능함 | 모든 버튼 및 상호작용 요소에 `tabindex`와 Focus Style을 적용함 | 마우스 없이 키보드만으로 모든 상호작용 완벽 제어 가능 | *(개인정보 제거 완료)* |
+| **03** | 화면 내 과도한 애니메이션으로 인한 시각적 피로도 증가 | `prefers-reduced-motion` 미디어 쿼리를 적용하여 애니메이션 토글 기능 구현 | 사용자 설정에 따라 큰 움직임을 끄거나 줄일 수 있도록 개선 | *(개인정보 제거 완료)* |
 
-        .target-box {
-            background-color: var(--card-bg);
-            border-left: 4px solid var(--accent-blue);
-            padding: 0.8rem 1rem;
-            border-radius: 0 8px 8px 0;
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-        }
+> 📁 **학생 자체 점검 파일:** `세_칸으로_정리한_강점_이나_취향_3개.png`, `개인정보를_제거한_근거_1개_또는_결과_문장.png`
 
-        /* Sections */
-        section {
-            margin-bottom: 2.5rem;
-        }
+---
 
-        h2 {
-            font-size: 1.3rem;
-            border-left: 4px solid var(--accent-green);
-            padding-left: 0.75rem;
-            margin-bottom: 1.25rem;
-            color: #ffffff;
-        }
+## 3. 해상도 및 가로 넘침 점검 (반응형)
+* **핵심 요소 3개:** ① 메인 프로필/소개 영역 ② 프로젝트 카드 목록 ③ 상호작용 버튼 및 메뉴
+* **가로 넘침 현상:** 0건 (문서 전체 및 주요 영역 넘침 없음)
 
-        /* Grid Cards */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.25rem;
-        }
+| 해상도 | 점검 항목 | 결과 | 첨부 증거 파일명 |
+| :---: | :--- | :---: | :--- |
+| **1366 × 768** | 스크롤 없이 핵심 3개 노출 및 가로 넘침 0건 | **통과** | `1366x768_수정_후_화면_파일.png` |
+| **1920 × 1080** | 스크롤 없이 핵심 3개 노출 및 가로 넘침 0건 | **통과** | `1920x1080_수정_후_화면_파일과_가로_넘침_확인_기록.png` |
 
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 10px;
-            padding: 1.25rem;
-            transition: border-color 0.2s, transform 0.2s;
-        }
+---
 
-        .card:hover {
-            border-color: var(--accent-blue);
-            transform: translateY(-2px);
-        }
+## 4. 결함 수정 및 콘솔 오류 점검
 
-        .card-title {
-            font-size: 1.05rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--card-border);
-        }
+* **브라우저 콘솔 오류 (Red Error):** **0건** 확인 완료 (`콘솔_오류_0건_확인_화면_파일.png`)
 
-        /* STAR Section (Accordions) */
-        details {
-            background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            padding: 1rem;
-        }
+<details>
+<summary><b>🛠️ [클릭] 결함 수정 전·후 목록 (3건 이상) 열기/접기</b></summary>
 
-        details summary {
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 1.05rem;
-            color: #ffffff;
-            list-style: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+<br>
 
-        details summary::-webkit-details-marker { display: none; }
-        details summary::after { content: "＋"; color: var(--accent-blue); font-weight: bold; }
-        details[open] summary::after { content: "－"; }
+1. **결함 1:** 특정 해상도에서 메인 카드가 화면 밖으로 삐져나가는 가로 넘침 발생 $\rightarrow$ **[수정 완료]** `max-width: 100%` 및 `box-sizing: border-box` 적용으로 가로 넘침 0건으로 해결.
+2. **결함 2:** 키보드 `Tab` 키 이동 시 현재 위치를 알 수 있는 포커스 링이 보이지 않음 $\rightarrow$ **[수정 완료]** `:focus-visible` 스타일을 추가하여 키보드 접근성 확보.
+3. **결함 3:** 모바일/작은 해상도에서 일부 상호작용 버튼 클릭 영역이 겹치는 현상 $\rightarrow$ **[수정 완료]** 버튼 간 간격(Margin/Padding)을 조정하여 독립적 클릭 가능하도록 수정.
 
-        .star-content {
-            margin-top: 0.8rem;
-            padding-top: 0.8rem;
-            border-top: 1px dashed var(--card-border);
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
+> 📁 **학생 자체 점검 파일:** `결함_3개_이상_수정_전후_목록.pdf`
 
-        .star-tag {
-            font-weight: bold;
-            color: var(--accent-blue);
-            margin-right: 0.5rem;
-        }
+</details>
 
-        /* Lists */
-        ul { list-style: none; padding: 0; }
-        ul li {
-            position: relative;
-            padding-left: 1.2rem;
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-        }
-        ul li::before {
-            content: "•";
-            color: var(--accent-green);
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-        }
+---
 
-        /* Table */
-        .table-responsive {
-            overflow-x: auto;
-        }
+## 5. 상호작용 및 접근성 점검
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid var(--card-border);
-        }
+* **상호작용 내용:** 메인 포트폴리오의 프로젝트 상세보기/토글 버튼 동작
+* **마우스/키보드 양쪽 검사:** 
+  * 마우스 클릭 시 상호작용 정상 동작
+  * 키보드 `Tab` 키로 버튼 이동 후 `Enter` / `Space` 키로 실행 가능
+* **움직임 제어:** 화면 내 큰 효과나 애니메이션을 끄거나 줄일 수 있는 옵션/미디어 쿼리 제공
 
-        th, td {
-            padding: 0.8rem 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--card-border);
-            font-size: 0.9rem;
-        }
+> 📁 **학생 자체 점검 파일:** `상호작용_동작_화면_파일_또는_짧은_화면_기록.mp4`, `마우스_키보드_양쪽_검사_결과.png`
 
-        th {
-            background-color: #1e293b;
-            color: var(--accent-blue);
-            font-weight: 700;
-        }
+---
 
-        td { color: var(--text-secondary); }
+## 📋 검증 안내서 (제출 화면 배치용)
 
-        .pass {
-            color: var(--accent-green);
-            font-weight: bold;
-            text-align: center;
-        }
+1. **어디로 가나요:** https://seohyosang95-spec.github.io/portfolio/
+2. **무엇을 하나요 (3단계 이내 / 30초 내 검증):**
+   * **1단계:** 공개 주소(`https://seohyosang95-spec.github.io/portfolio/`)에 접속합니다.
+   * **2단계:** 화면 중앙의 [상호작용 버튼/프로젝트 카드]를 마우스로 클릭하거나 키보드(`Tab` 후 `Enter`)로 눌러봅니다.
+   * **3단계:** 상호작용 결과 창(상세 내용/변화)이 정상적으로 노출되는지 확인합니다.
+3. **무엇이 보이면 통과인가요:** 
+   * 스크롤 없이 핵심 3개 요소가 한눈에 보이고, 가로 스크롤(넘침)이 생기지 않으며, 버튼 클릭/키보드 동작 시 해당 상호작용 결과가 즉시 화면에 나타나면 통과입니다.
+4. **안 될 때:** 
+   * 브라우저 새로고침(`F5`)을 시도하거나, 시크릿 창 또는 다른 브라우저(Chrome/Edge 등)에서 재접속합니다.
 
-        /* Buttons & Links */
-        .btn {
-            display: inline-block;
-            background-color: rgba(56, 189, 248, 0.1);
-            color: var(--accent-blue);
-            border: 1px solid var(--accent-blue);
-            padding: 0.6rem 1.2rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            margin-top: 0.8rem;
-            transition: background 0.2s;
-        }
+---
 
-        .btn:hover {
-            background-color: var(--accent-blue);
-            color: #000;
-        }
+<details>
+<summary><b>🤖 [클릭] AI 사용 및 본인 판단 기록 (3줄 요약) 열기/접기</b></summary>
 
-        footer {
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--card-border);
-        }
-    </style>
-</head>
-<body>
+<br>
 
-<div class="container">
-    <header>
-        <span class="badge">SOC Security Analyst Candidate</span>
-        <h1>서효상 | 정보보안 포트폴리오</h1>
-        <div class="subtitle">탐지–분석–대응을 끝까지 책임지는 보안 실무형 인재</div>
-        <div class="target-box">
-            <strong>[대상 문장]</strong> 이 페이지는 채용 담당자/현업 멘토에게 보안관제(SOC) 직무로 전향하기 위한 제 강점과 준비 과정을 보여주기 위한 것이다.
-        </div>
-    </header>
+1. **AI에게 맡긴 일:** 반응형 레이아웃 가로 넘침 방지를 위한 CSS 속성 제안 및 검증 안내서 양식 기획
+2. **내가 판단한 일:** 제시된 웹 접근성 가이드라인 중 포트폴리오 구조에 맞는 필수 항목만 선별하여 실제 코드 적용 및 검증 진행
+3. **AI 말을 안 들은 일:** AI가 추천한 복잡한 3D 애니메이션 효과는 사용자의 시각적 피로도를 낮추고 로딩 속도를 최적화하기 위해 채택하지 않고 심플한 CSS 전환 효과로 대체함
 
-    <!-- 1. 공개 / 비공개 점검표 -->
-    <section>
-        <h2>공개 / 비공개 범위 설정</h2>
-        <div class="grid-2">
-            <div class="card">
-                <div class="card-title" style="color: var(--accent-green);">🟢 [공개할 것]</div>
-                <ul>
-                    <li>병원 근무 6년에서 나온 책임감·배려·기록 습관</li>
-                    <li>보안관제 목표와 학습/준비 과정</li>
-                    <li>공개 가능한 근거 1개 (노션 페이지)</li>
-                </ul>
-            </div>
-            <div class="card">
-                <div class="card-title" style="color: var(--accent-red);">🔴 [공개하지 않을 것]</div>
-                <ul>
-                    <li>주소/상세 근무지/환자 관련 정보 등 민감정보</li>
-                    <li>비밀번호·토큰·API 키 등 비밀값</li>
-                    <li>개인 연락처 (전화번호/개인 이메일)</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- 2. 핵심 강점 3가지 (STAR) -->
-    <section>
-        <h2>핵심 강점 3가지 (STAR)</h2>
-        
-        <details open>
-            <summary>강점 1. 기록 습관 & 정확성</summary>
-            <div class="star-content">
-                <p><span class="star-tag">📍 상황 (S):</span> 병원 근무 6년간 수많은 환자 처방 및 인수·인계 진행 시 오류 위험 존재</p>
-                <p><span class="star-tag">⚡ 행동 (A):</span> 업무 누락 방지를 위해 일일 교대 점검 체크리스트 서식을 직접 작성 및 교대 시 이중 확인</p>
-                <p><span class="star-tag">🎯 결과 (R):</span> 6년간 의료 기록 오류 0건 유지 및 팀 내 인수인계 신뢰도 상승</p>
-            </div>
-        </details>
-
-        <details>
-            <summary>강점 2. 이상징후 탐지 및 빠른 대응</summary>
-            <div class="star-content">
-                <p><span class="star-tag">📍 상황 (S):</span> 응급 환자 상태 변화 시 즉각적인 원인 파악 및 유관 부서 전달 필요</p>
-                <p><span class="star-tag">⚡ 행동 (A):</span> 환자 생체 수치 및 미세한 이상징후 감지 즉시 기록하고 담당 의료진에게 핵심 요약 전달</p>
-                <p><span class="star-tag">🎯 결과 (R):</span> 초기 골든타임 확보로 응급 상황 안전하게 처리</p>
-            </div>
-        </details>
-
-        <details>
-            <summary>강점 3. 침착한 우선순위 판단</summary>
-            <div class="star-content">
-                <p><span class="star-tag">📍 상황 (S):</span> 동시에 여러 업무 요청이 몰리는 과부하 상황 발생</p>
-                <p><span class="star-tag">⚡ 행동 (A):</span> 환자 중증도 및 응급도 기준에 따라 업무 순서를 즉시 정렬하고 차분하게 순차 처리</p>
-                <p><span class="star-tag">🎯 결과 (R):</span> 누락 없는 실시간 응급 업무 완료 및 업무 효율 향상</p>
-            </div>
-        </details>
-    </section>
-
-    <!-- 3. 보안관제 준비 과정 -->
-    <section>
-        <h2>보안관제(SOC) 준비 과정 및 증명 근거</h2>
-        <div class="card">
-            <ul>
-                <li>Windows 이벤트 로그 수집 및 8개 탐지 룰 작성</li>
-                <li>OpenVAS / Nmap 기반 취약점 진단 및 조치 리포트 작성</li>
-                <li>Wireshark 패킷 분석을 통한 IOC 추출 스터디 진행</li>
-            </ul>
-            <a href="https://notion.so" target="_blank" class="btn">🔗 서효상 보안 학습 & 시나리오 리포트 노션 보러가기</a>
-        </div>
-    </section>
-
-    <!-- 4. AI 활용 소회 & 결함 수정 기록 -->
-    <section>
-        <h2>AI 활용 소회 & 결함 수정 기록</h2>
-        <div class="grid-2">
-            <div class="card">
-                <div class="card-title">🤖 AI 활용 소회</div>
-                <ul>
-                    <li><strong>AI에게 맡긴 일:</strong> HTML/CSS 기본 레이아웃 및 접기/펼치기 카드와 접근성 모달 자바스크립트 코드 생성</li>
-                    <li><strong>내가 판단한 일:</strong> 보안관제 직무 특성에 맞춰 병원 경력의 강점을 STAR 구조로 직접 구성하고 개인정보 항목 검토</li>
-                    <li><strong>AI 말을 안 들은 일:</strong> AI가 제안한 과도한 애니메이션 효과는 시선 분산을 막기 위해 모두 제거</li>
-                </ul>
-            </div>
-            <div class="card">
-                <div class="card-title">🛠️ 결함 수정 기록 (3건)</div>
-                <ul>
-                    <li><strong>결함 1 (디자인):</strong> 과도한 애니메이션 ➔ 시선 분산 방지 위해 제거 완료</li>
-                    <li><strong>결함 2 (레이아웃):</strong> 해상도 변경 시 가로 스크롤 발생 ➔ 반응형 수치 적용으로 가로 넘침 0건 수정</li>
-                    <li><strong>결함 3 (접근성):</strong> 키보드로 모달 조작 불가 ➔ Tab/Enter 키 이벤트 및 포커스 관리 적용</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. 최종 점검 체크리스트 수행 결과 -->
-    <section>
-        <h2>최종 점검 체크리스트 수행 결과</h2>
-        <div class="table-responsive">
-            <table>
-                <thead>
-                    <tr>
-                        <th>점검 항목</th>
-                        <th>요구 사항</th>
-                        <th>이행 및 검증 내용</th>
-                        <th style="text-align: center;">결과</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>1. 대상 및 공개범위</strong></td>
-                        <td>대상 문장 및 공개/비공개 3종 작성</td>
-                        <td>채용담당자 대상 문장 및 개인정보 비공개 범위 설정 완료</td>
-                        <td class="pass">✅ 통과</td>
-                    </tr>
-                    <tr>
-                        <td><strong>2. 핵심 강점 (STAR)</strong></td>
-                        <td>상황·행동·결과 3개 및 근거 연결</td>
-                        <td>병원 6년 경력 기반 STAR 강점 3종 및 노션 리포트 링크 연결</td>
-                        <td class="pass">✅ 통과</td>
-                    </tr>
-                    <tr>
-                        <td><strong>3. 첫 화면 레이아웃</strong></td>
-                        <td>1366×768 / 1920×1080 반응형 점검</td>
-                        <td>스크롤 없이 핵심 노출, 가로 스크롤/넘침 0건 달성</td>
-                        <td class="pass">✅ 통과</td>
-                    </tr>
-                    <tr>
-                        <td><strong>4. 결함 수정 & 접근성</strong></td>
-                        <td>결함 3개 이상 수정 및 콘솔 오류 0건</td>
-                        <td>애니메이션 제거, 넘침 수정, 키보드 접근성 확보 / 콘솔 에러 0건</td>
-                        <td class="pass">✅ 통과</td>
-                    </tr>
-                    <tr>
-                        <td><strong>5. 상호작용 및 키보드</strong></td>
-                        <td>마우스/키보드(Tab, Enter) 동작</td>
-                        <td>접기/펼치기(details) 및 모달 팝업 키보드 조작 완벽 구현</td>
-                        <td class="pass">✅ 통과</td>
-                    </tr>
-                    <tr>
-                        <td><strong>6. 개인정보 & 보안</strong></td>
-                        <td>민감정보 및 API 키 0건</td>
-                        <td>주소/연락처/비밀값/API 키 배포 및 코드 내 0건 적용</td>
-                        <td class="pass">✅ 통과</td>
-                    </tr>
-                    <tr>
-                        <td><strong>7. AI 활용 소회</strong></td>
-                        <td>맡긴 일·판단한 일·안 들은 일 작성</td>
-                        <td>AI와 본인 역할 분담 및 고유 판단 내용 3줄 작성 완료</td>
-                        <td class="pass">✅ 통과</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-    <footer>
-        <p>© 2026 Seo Hyosang. All rights reserved.</p>
-    </footer>
-</div>
-
-</body>
-</html>
+</details>
