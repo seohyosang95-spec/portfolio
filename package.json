@@ -1,0 +1,18 @@
+{
+  "name": "portfolio-passkey-t08",
+  "version": "1.0.0",
+  "private": true,
+  "description": "과제 8 - 패스키로 잠그는 포트폴리오 비공개 영역",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@simplewebauthn/server": "^13.3.0",
+    "express": "^5.1.0"
+  }
+}

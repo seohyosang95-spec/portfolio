@@ -1,408 +1,103 @@
-HTML
 <!DOCTYPE html>
 <html lang="ko">
-<head<link rel="shortcut icon" href="#">>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>서효상 | 정보보안 포트폴리오</title>
-    <style>
-        :root {
-            --bg-color: #0b1329;
-            --card-bg: #131f37;
-            --card-border: #1e293b;
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --accent-green: #10b981;
-            --accent-blue: #38bdf8;
-            --accent-red: #f43f5e;
-            --font-main: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            font-family: var(--font-main);
-            line-height: 1.6;
-            padding: 2rem 1rem;
-        }
-
-        .container {
-            max-width: 960px;
-            margin: 0 auto;
-        }
-
-        /* Header */
-        header {
-            border-bottom: 2px solid var(--card-border);
-            padding-bottom: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .badge {
-            display: inline-block;
-            background: rgba(16, 185, 129, 0.15);
-            color: var(--accent-green);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            border: 1px solid rgba(16, 185, 129, 0.3);
-        }
-
-        header h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 0.4rem;
-        }
-
-        .subtitle {
-            color: var(--accent-blue);
-            font-size: 1.15rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .target-box {
-            background-color: var(--card-bg);
-            border-left: 4px solid var(--accent-blue);
-            padding: 0.8rem 1rem;
-            border-radius: 0 8px 8px 0;
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-        }
-
-        /* Sections */
-        section {
-            margin-bottom: 2.5rem;
-        }
-
-        h2 {
-            font-size: 1.3rem;
-            border-left: 4px solid var(--accent-green);
-            padding-left: 0.75rem;
-            margin-bottom: 1.25rem;
-            color: #ffffff;
-        }
-
-        /* Grid Cards */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.25rem;
-        }
-
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 10px;
-            padding: 1.25rem;
-            transition: border-color 0.2s, transform 0.2s;
-        }
-
-        .card:hover {
-            border-color: var(--accent-blue);
-            transform: translateY(-2px);
-        }
-
-        .card-title {
-            font-size: 1.05rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--card-border);
-        }
-
-        /* STAR Section (Accordions) */
-        details {
-            background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            padding: 1rem;
-        }
-
-        details summary {
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 1.05rem;
-            color: #ffffff;
-            list-style: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        details summary::-webkit-details-marker { display: none; }
-        details summary::after { content: "＋"; color: var(--accent-blue); font-weight: bold; }
-        details[open] summary::after { content: "－"; }
-
-        .star-content {
-            margin-top: 0.8rem;
-            padding-top: 0.8rem;
-            border-top: 1px dashed var(--card-border);
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-
-        .star-tag {
-            font-weight: bold;
-            color: var(--accent-blue);
-            margin-right: 0.5rem;
-        }
-
-        /* Lists */
-        ul { list-style: none; padding: 0; }
-        ul li {
-            position: relative;
-            padding-left: 1.2rem;
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-        }
-        ul li::before {
-            content: "•";
-            color: var(--accent-green);
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-        }
-
-        /* Table */
-        .table-responsive {
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid var(--card-border);
-        }
-
-        th, td {
-            padding: 0.8rem 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--card-border);
-            font-size: 0.9rem;
-        }
-
-        th {
-            background-color: #1e293b;
-            color: var(--accent-blue);
-            font-weight: 700;
-        }
-
-        td { color: var(--text-secondary); }
-
-        .pass {
-            color: var(--accent-green);
-            font-weight: bold;
-            text-align: center;
-        }
-
-        /* Buttons & Links */
-        .btn {
-            display: inline-block;
-            background-color: rgba(56, 189, 248, 0.1);
-            color: var(--accent-blue);
-            border: 1px solid var(--accent-blue);
-            padding: 0.6rem 1.2rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            margin-top: 0.8rem;
-            transition: background 0.2s;
-        }
-
-        .btn:hover {
-            background-color: var(--accent-blue);
-            color: #000;
-        }
-
-        footer {
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--card-border);
-        }
-    </style>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>서효상 | 정보보안 포트폴리오 + 패스키</title>
+  <style>
+    :root{--bg:#0b1329;--card:#131f37;--border:#1e293b;--text:#f8fafc;--muted:#94a3b8;--green:#10b981;--blue:#38bdf8;--red:#f43f5e}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.65;padding:2rem 1rem}.container{max-width:960px;margin:auto}header{border-bottom:2px solid var(--border);padding-bottom:1.5rem;margin-bottom:2rem}.badge{display:inline-block;background:rgba(16,185,129,.15);color:var(--green);border:1px solid rgba(16,185,129,.3);padding:.3rem .8rem;border-radius:20px;font-size:.85rem;font-weight:700}h1{margin:.7rem 0 .2rem}.subtitle{color:var(--blue);font-weight:700}.target-box,.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.2rem}.target-box{margin-top:1rem;border-left:4px solid var(--blue)}section{margin:2.3rem 0}h2{font-size:1.35rem;border-left:4px solid var(--green);padding-left:.75rem}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}ul{padding-left:1.2rem;color:var(--muted)}details{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1rem;margin:.8rem 0}summary{cursor:pointer;font-weight:700}.btn,button{border:1px solid var(--blue);background:rgba(56,189,248,.1);color:var(--blue);padding:.65rem 1rem;border-radius:7px;font-weight:700;cursor:pointer;margin:.25rem}.btn{text-decoration:none;display:inline-block}.danger{border-color:var(--red);color:#fecdd3;background:rgba(244,63,94,.08)}button:disabled{opacity:.45;cursor:not-allowed}label{display:block;color:var(--muted);font-size:.9rem;margin:.7rem 0 .25rem}input{width:100%;padding:.72rem;border-radius:7px;border:1px solid var(--border);background:#0f172a;color:#fff}.private-zone{border:2px solid var(--blue);border-radius:14px;padding:1.3rem;background:linear-gradient(180deg,rgba(56,189,248,.05),transparent)}.locked{color:#cbd5e1}.private-ok{color:var(--green);font-weight:800}.fake-note{font-size:.85rem;color:var(--muted)}#statusBox{padding:.8rem 1rem;border-radius:8px;background:#0f172a;margin:1rem 0;min-height:3rem}#statusBox[data-type="success"]{border-left:4px solid var(--green)}#statusBox[data-type="error"]{border-left:4px solid var(--red)}#statusBox[data-type="info"]{border-left:4px solid var(--blue)}.passkey-row{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding:.7rem 0}.small{padding:.4rem .7rem}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:.84rem}th,td{border-bottom:1px solid var(--border);padding:.65rem;text-align:left}th{color:var(--blue)}code{color:#c4b5fd;word-break:break-all}footer{text-align:center;color:var(--muted);border-top:1px solid var(--border);padding-top:1.5rem;margin-top:3rem}.warning{border-left:4px solid #f59e0b}.public-label{color:var(--green);font-weight:800}.private-label{color:var(--red);font-weight:800}
+  </style>
+  <script src="https://unpkg.com/@simplewebauthn/browser@13.3.0/dist/bundle/index.umd.min.js"></script>
 </head>
 <body>
-
 <div class="container">
-    <header>
-        <span class="badge">SOC Security Analyst Candidate</span>
-        <h1>서효상 | 정보보안 포트폴리오</h1>
-        <div class="subtitle">탐지–분석–대응을 끝까지 책임지는 보안 실무형 인재</div>
-        <div class="target-box">
-            <strong>[대상 문장]</strong> 이 페이지는 채용 담당자/현업 멘토에게 보안관제(SOC) 직무로 전향하기 위한 제 강점과 준비 과정을 보여주기 위한 것이다.
+  <header>
+    <span class="badge">SOC Security Analyst Candidate</span>
+    <h1>서효상 | 정보보안 포트폴리오</h1>
+    <div class="subtitle">탐지–분석–대응을 끝까지 책임지는 보안 실무형 인재</div>
+    <div class="target-box"><strong>[대상 문장]</strong> 이 페이지는 채용 담당자/현업 멘토에게 보안관제(SOC) 직무로 전향하기 위한 제 강점과 준비 과정을 보여주기 위한 것이다.</div>
+  </header>
+
+  <section>
+    <h2>공개 / 비공개 범위 설정</h2>
+    <div class="grid">
+      <div class="card"><div class="public-label">🟢 공개 영역</div><ul><li>보안관제 목표와 학습 과정</li><li>경력에서 얻은 책임감·기록 습관</li><li>공개 가능한 포트폴리오 근거</li></ul></div>
+      <div class="card"><div class="private-label">🔴 비공개 영역</div><ul><li>패스키 인증 뒤에만 서버에서 내려오는 가상 프로젝트 메모</li><li>가상 지원 목록</li><li>가상 학습 회고</li></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>핵심 강점 3가지 (STAR)</h2>
+    <details open><summary>강점 1. 기록 습관 & 정확성</summary><p>업무 누락을 줄이기 위해 체크리스트와 이중 확인 습관을 만들고 유지했습니다.</p></details>
+    <details><summary>강점 2. 이상징후 탐지 및 빠른 대응</summary><p>상태 변화의 핵심을 빠르게 파악하고 기록하여 필요한 사람에게 정확하게 전달하는 경험을 쌓았습니다.</p></details>
+    <details><summary>강점 3. 침착한 우선순위 판단</summary><p>동시에 여러 요청이 들어오는 상황에서 중요도와 긴급도를 기준으로 순서를 정해 처리했습니다.</p></details>
+  </section>
+
+  <section>
+    <h2>보안관제(SOC) 준비 과정 및 증명 근거</h2>
+    <div class="card"><ul><li>Windows 이벤트 로그 수집 및 탐지 룰 작성</li><li>OpenVAS / Nmap 기반 취약점 진단 및 조치 리포트 작성</li><li>Wireshark 패킷 분석을 통한 IOC 추출 스터디</li></ul><a class="btn" href="https://app.notion.com/p/3badb5dd9cd480d9824dcfd34021d589" target="_blank" rel="noreferrer">🔗 보안 학습 리포트 보기</a></div>
+  </section>
+
+  <section class="private-zone" id="private-zone">
+    <h2>🔒 나만의 비공개 공간 — 패스키 인증</h2>
+    <p>공개 소개 내용은 누구나 볼 수 있습니다. 아래의 실제 비공개 내용은 <strong>패스키 인증이 성공한 뒤에만 서버 API가 반환</strong>합니다.</p>
+    <div class="card warning"><strong>과제용 데이터 안내</strong><br>이 영역에 사용되는 내용은 모두 만들어 넣은 가상 자료입니다. 실제 연락처, 신분증 번호, 비밀번호, API 키를 넣지 않습니다.</div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>1. 계정과 패스키</h3>
+        <label for="username">과제용 계정 이름</label>
+        <input id="username" value="seo-main" autocomplete="username webauthn">
+        <label for="passkeyName">패스키 이름</label>
+        <input id="passkeyName" value="내 노트북" placeholder="예: 내 노트북 / 내 휴대폰">
+        <div style="margin-top:.8rem">
+          <button id="registerBtn">패스키 등록</button>
+          <button id="loginBtn">패스키로 로그인</button>
+          <button id="logoutBtn" class="danger">로그아웃</button>
         </div>
-    </header>
+        <p id="sessionState">로그아웃 상태</p>
+        <div id="statusBox" data-type="info">준비되었습니다.</div>
+      </div>
 
-    <!-- 1. 공개 / 비공개 점검표 -->
-    <section>
-        <h2>공개 / 비공개 범위 설정</h2>
-        <div class="grid-2">
-            <div class="card">
-                <div class="card-title" style="color: var(--accent-green);">🟢 [공개할 것]</div>
-                <ul>
-                    <li>병원 근무 6년에서 나온 책임감·배려·기록 습관</li>
-                    <li>보안관제 목표와 학습/준비 과정</li>
-                    <li>공개 가능한 근거 1개 (노션 페이지)</li>
-                </ul>
-            </div>
-            <div class="card">
-                <div class="card-title" style="color: var(--accent-red);">🔴 [공개하지 않을 것]</div>
-                <ul>
-                    <li>주소/상세 근무지/환자 관련 정보 등 민감정보</li>
-                    <li>비밀번호·토큰·API 키 등 비밀값</li>
-                    <li>개인 연락처 (전화번호/개인 이메일)</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+      <div class="card">
+        <h3>2. 등록된 패스키 목록</h3>
+        <p>두 개를 등록한 뒤 하나를 삭제하고 남은 하나로 로그인해 보세요.</p>
+        <ul id="passkeyList"><li>로그인 후 확인할 수 있습니다.</li></ul>
+      </div>
+    </div>
 
-    <!-- 2. 핵심 강점 3가지 (STAR) -->
-    <section>
-        <h2>핵심 강점 3가지 (STAR)</h2>
-        
-        <details open>
-            <summary>강점 1. 기록 습관 & 정확성</summary>
-            <div class="star-content">
-                <p><span class="star-tag">📍 상황 (S):</span> 병원 근무 6년간 수많은 환자 처방 및 인수·인계 진행 시 오류 위험 존재</p>
-                <p><span class="star-tag">⚡ 행동 (A):</span> 업무 누락 방지를 위해 일일 교대 점검 체크리스트 서식을 직접 작성 및 교대 시 이중 확인</p>
-                <p><span class="star-tag">🎯 결과 (R):</span> 6년간 의료 기록 오류 0건 유지 및 팀 내 인수인계 신뢰도 상승</p>
-            </div>
-        </details>
+    <div class="card" style="margin-top:1rem">
+      <h3>3. 비공개 자료 조회</h3>
+      <button id="loadPrivateBtn" disabled>비공개 자료 다시 조회</button>
+      <div id="privateBox"><p class="locked">🔒 로그인 전에는 비공개 내용 자체를 서버에서 보내지 않습니다.</p></div>
+    </div>
 
-        <details>
-            <summary>강점 2. 이상징후 탐지 및 빠른 대응</summary>
-            <div class="star-content">
-                <p><span class="star-tag">📍 상황 (S):</span> 응급 환자 상태 변화 시 즉각적인 원인 파악 및 유관 부서 전달 필요</p>
-                <p><span class="star-tag">⚡ 행동 (A):</span> 환자 생체 수치 및 미세한 이상징후 감지 즉시 기록하고 담당 의료진에게 핵심 요약 전달</p>
-                <p><span class="star-tag">🎯 결과 (R):</span> 초기 골든타임 확보로 응급 상황 안전하게 처리</p>
-            </div>
-        </details>
+    <div class="card" style="margin-top:1rem">
+      <h3>4. 다른 계정 접근 차단 시험</h3>
+      <p>예: <code>seo-main</code>으로 로그인한 뒤 <code>seo-test</code>를 입력하면 403이 나와야 합니다.</p>
+      <label for="otherAccount">다른 계정 이름</label>
+      <input id="otherAccount" value="seo-test">
+      <button id="otherTestBtn" disabled>다른 계정 자료 요청 시험</button>
+    </div>
+  </section>
 
-        <details>
-            <summary>강점 3. 침착한 우선순위 판단</summary>
-            <div class="star-content">
-                <p><span class="star-tag">📍 상황 (S):</span> 동시에 여러 업무 요청이 몰리는 과부하 상황 발생</p>
-                <p><span class="star-tag">⚡ 행동 (A):</span> 환자 중증도 및 응급도 기준에 따라 업무 순서를 즉시 정렬하고 차분하게 순차 처리</p>
-                <p><span class="star-tag">🎯 결과 (R):</span> 누락 없는 실시간 응급 업무 완료 및 업무 효율 향상</p>
-            </div>
-        </details>
-    </section>
+  <section>
+    <h2>과제 확인 기록 — 민감값 가림</h2>
+    <p>challenge와 공개키는 일부만 표시합니다. 세션 쿠키와 개인키는 표시하지 않습니다.</p>
+    <button id="refreshEvidenceBtn">기록 새로고침</button>
+    <div class="table-wrap card">
+      <table><thead><tr><th>시간</th><th>종류</th><th>계정</th><th>HTTP</th><th>가린 기록</th></tr></thead><tbody id="evidenceBox"><tr><td colspan="5">아직 기록이 없습니다.</td></tr></tbody></table>
+    </div>
+  </section>
 
-    <!-- 3. 보안관제 준비 과정 -->
-    <section>
-        <h2>보안관제(SOC) 준비 과정 및 증명 근거</h2>
-        <div class="card">
-            <ul>
-                <li>Windows 이벤트 로그 수집 및 8개 탐지 룰 작성</li>
-                <li>OpenVAS / Nmap 기반 취약점 진단 및 조치 리포트 작성</li>
-                <li>Wireshark 패킷 분석을 통한 IOC 추출 스터디 진행</li>
-            </ul>
-            <a href="https://app.notion.com/p/3badb5dd9cd480d9824dcfd34021d589" target="_blank" class="btn">🔗 서효상 보안 학습 & 시나리오 리포트 노션 보러가기</a>
-        </div>
-    </section>
+  <section>
+    <h2>AI 활용 소회</h2>
+    <div class="card"><ul><li><strong>AI에게 맡긴 일:</strong> WebAuthn 서버·브라우저 흐름의 기본 코드와 제출용 테스트 구조 작성.</li><li><strong>내가 직접 판단한 일:</strong> 공개/비공개 경계, 가상 데이터 항목, 패스키 이름과 테스트 계정 구성.</li><li><strong>AI 말을 따르지 않은 일:</strong> 과도한 화면 효과보다 인증 흐름과 요청·응답 증거를 우선하기로 판단함.</li></ul></div>
+  </section>
 
-    <!-- 4. AI 활용 소회 & 결함 수정 기록 -->
-    <section>
-        <h2>AI 활용 소회 & 결함 수정 기록</h2>
-        <div class="grid-2">
-            <div class="card">
-                <div class="card-title">🤖 AI 활용 소회</div>
-                <ul>
-                    <li><strong>AI에게 맡긴 일:</strong> HTML/CSS 기본 레이아웃 및 접기/펼치기 카드와 접근성 모달 자바스크립트 코드 생성</li>
-                    <li><strong>내가 판단한 일:</strong> 보안관제 직무 특성에 맞춰 병원 경력의 강점을 STAR 구조로 직접 구성하고 개인정보 항목 검토</li>
-                    <li><strong>AI 말을 안 들은 일:</strong> AI가 제안한 과도한 애니메이션 효과는 시선 분산을 막기 위해 모두 제거</li>
-                </ul>
-            </div>
-            <div class="card">
-                <div class="card-title">🛠️ 결함 수정 기록 (3건)</div>
-                <ul>
-                    <li><strong>결함 1 (디자인):</strong> 과도한 애니메이션 ➔ 시선 분산 방지 위해 제거 완료</li>
-                    <li><strong>결함 2 (레이아웃):</strong> 해상도 변경 시 가로 스크롤 발생 ➔ 반응형 수치 적용으로 가로 넘침 0건 수정</li>
-                    <li><strong>결함 3 (접근성):</strong> 키보드로 모달 조작 불가 ➔ Tab/Enter 키 이벤트 및 포커스 관리 적용</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. 최종 점검 체크리스트 수행 결과 -->
-    <section>
-        <h2>최종 점검 체크리스트 수행 결과</h2>
-        <div class="table-responsive">
-            <table>
-                <thead>
-                    <tr>
-                        <th>점검 항목</th>
-                        <th>요구 사항</th>
-                        <th>이행 및 검증 내용</th>
-                        <th style="text-align: center;">결과</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>1. 대상 및 공개범위</strong></td>
-                        <td>대상 문장 및 공개/비공개 3종 작성</td>
-                        <td>채용담당자 대상 문장 및 개인정보 비공개 범위 설정 완료</td>
-                        <td class="pass">✅ 통과</td>
-                    </tr>
-                    <tr>
-                        <td><strong>2. 핵심 강점 (STAR)</strong></td>
-                        <td>상황·행동·결과 3개 및 근거 연결</td>
-                        <td>병원 6년 경력 기반 STAR 강점 3종 및 노션 리포트 링크 연결</td>
-                        <td class="pass">✅ 통과</td>
-                    </tr>
-                    <tr>
-                        <td><strong>3. 첫 화면 레이아웃</strong></td>
-                        <td>1366×768 / 1920×1080 반응형 점검</td>
-                        <td>스크롤 없이 핵심 노출, 가로 스크롤/넘침 0건 달성</td>
-                        <td class="pass">✅ 통과</td>
-                    </tr>
-                    <tr>
-                        <td><strong>4. 결함 수정 & 접근성</strong></td>
-                        <td>결함 3개 이상 수정 및 콘솔 오류 0건</td>
-                        <td>애니메이션 제거, 넘침 수정, 키보드 접근성 확보 / 콘솔 에러 0건</td>
-                        <td class="pass">✅ 통과</td>
-                    </tr>
-                    <tr>
-                        <td><strong>5. 상호작용 및 키보드</strong></td>
-                        <td>마우스/키보드(Tab, Enter) 동작</td>
-                        <td>접기/펼치기(details) 및 모달 팝업 키보드 조작 완벽 구현</td>
-                        <td class="pass">✅ 통과</td>
-                    </tr>
-                    <tr>
-                        <td><strong>6. 개인정보 & 보안</strong></td>
-                        <td>민감정보 및 API 키 0건</td>
-                        <td>주소/연락처/비밀값/API 키 배포 및 코드 내 0건 적용</td>
-                        <td class="pass">✅ 통과</td>
-                    </tr>
-                    <tr>
-                        <td><strong>7. AI 활용 소회</strong></td>
-                        <td>맡긴 일·판단한 일·안 들은 일 작성</td>
-                        <td>AI와 본인 역할 분담 및 고유 판단 내용 3줄 작성 완료</td>
-                        <td class="pass">✅ 통과</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-    <footer>
-        <p>© 2026 Seo Hyosang. All rights reserved.</p>
-    </footer>
+  <footer>© 2026 Seo Hyosang. 과제 8용 패스키 확장 버전.</footer>
 </div>
-
+<script src="app.js"></script>
 </body>
 </html>
-
