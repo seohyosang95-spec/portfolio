@@ -17,7 +17,9 @@ const DATA_FILE = path.join(__dirname, 'data', 'db.json');
 const app = express();
 app.use(express.json({ limit: '1mb' }));
 app.use(express.static(__dirname));
-
+app.get('/', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 const PORT = process.env.PORT || 3000;
 const RP_NAME = process.env.RP_NAME || '서효상 정보보안 포트폴리오';
 const RP_ID = process.env.RP_ID || 'localhost';
