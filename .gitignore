@@ -2,3 +2,6 @@
 node_modules/
 data/
 index-backup.html
+.vercel
+
+.env.development.local
