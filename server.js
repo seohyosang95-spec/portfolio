@@ -20,6 +20,10 @@ app.use(express.static(__dirname));
 app.get('/', (_req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
+app.get('/app.js', (_req, res) => {
+  res.type('application/javascript');
+  res.sendFile(path.join(__dirname, 'app.js'));
+});
 const PORT = process.env.PORT || 3000;
 const RP_NAME = process.env.RP_NAME || '서효상 정보보안 포트폴리오';
 const RP_ID = process.env.RP_ID || 'localhost';
