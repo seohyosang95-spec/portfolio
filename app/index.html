@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="논문의 결과를 반영해 AI 코드 생성 프롬프트를 구체적으로 만드는 점검 앱">
+  <title>프롬프트 체크메이트 | BR-B</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231b2a4a'/%3E%3Cpath d='M18 32h28M32 18v28' stroke='%23f5c45c' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
+  <style>
+    :root { --ink:#17233a; --muted:#657188; --paper:#f5f7fb; --panel:#fff; --line:#dce2ea; --blue:#1b2a4a; --gold:#f5c45c; --mint:#dcefe8; --danger:#a43d46; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:system-ui,-apple-system,"Segoe UI","Malgun Gothic",sans-serif; line-height:1.6; }
+    a { color:inherit; }
+    .topbar { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:18px clamp(20px,5vw,72px); border-bottom:1px solid var(--line); background:rgba(255,255,255,.92); backdrop-filter:blur(12px); }
+    .back { display:flex; align-items:center; gap:10px; text-decoration:none; font-weight:800; }
+    .brand-mark { display:grid; place-items:center; width:32px; height:32px; border-radius:10px; background:var(--blue); color:var(--gold); font-size:.78rem; letter-spacing:-.04em; }
+    .badge { color:var(--muted); font-size:.9rem; }
+    main { width:min(1120px, calc(100% - 40px)); margin:0 auto; padding:54px 0 72px; }
+    .eyebrow { margin:0 0 12px; color:#8b6414; font-size:.84rem; font-weight:800; letter-spacing:.12em; }
+    h1 { max-width:760px; margin:0; font-size:clamp(2.2rem,6vw,4.6rem); line-height:1.05; letter-spacing:-.055em; }
+    .lead { max-width:720px; margin:22px 0 0; font-size:clamp(1.1rem,2vw,1.35rem); line-height:1.55; }
+    .paper-note { display:flex; flex-wrap:wrap; gap:10px 18px; margin-top:26px; color:var(--muted); font-size:.95rem; }
+    .paper-note strong { color:var(--ink); }
+    .proof-grid { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:12px; margin-top:30px; }
+    .proof { padding:16px 18px; border:1px solid var(--line); border-radius:16px; background:#fff; box-shadow:0 9px 24px rgba(25,42,74,.05); }
+    .proof strong { display:block; margin-bottom:3px; font-size:1.15rem; color:var(--blue); }
+    .proof span { color:var(--muted); font-size:.88rem; }
+    .workspace { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr); gap:24px; margin-top:46px; }
+    .card { border:1px solid var(--line); border-radius:24px; background:var(--panel); box-shadow:0 16px 40px rgba(25,42,74,.08); }
+    .form-card { padding:28px; }
+    .result-card { padding:28px; background:var(--blue); color:#fff; }
+    .card h2 { margin:0 0 7px; font-size:1.35rem; letter-spacing:-.02em; }
+    .form-toolbar { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:8px; }
+    .step-label { color:#8b6414; font-size:.78rem; font-weight:900; letter-spacing:.1em; text-transform:uppercase; }
+    .toolbar-actions { display:flex; gap:7px; }
+    .ghost { padding:8px 10px; border:1px solid var(--line); border-radius:10px; background:#fff; color:var(--blue); font:inherit; font-size:.82rem; font-weight:800; cursor:pointer; }
+    .ghost:hover { border-color:#a7b4c8; background:#f6f8fb; }
+    .card-intro { margin:0 0 22px; color:var(--muted); }
+    .result-card .card-intro { color:#dbe4f1; }
+    .field { margin-top:19px; }
+    label { display:flex; justify-content:space-between; gap:10px; margin-bottom:8px; font-weight:800; }
+    label span { color:var(--muted); font-size:.83rem; font-weight:500; }
+    textarea { width:100%; min-height:105px; resize:vertical; padding:14px 15px; border:1px solid #cbd4df; border-radius:14px; background:#fff; color:var(--ink); font:inherit; line-height:1.55; }
+    textarea:focus { outline:3px solid rgba(245,196,92,.5); border-color:#9f7b24; }
+    .form-actions { display:grid; grid-template-columns:1fr; gap:9px; margin-top:22px; }
+    .primary { width:100%; padding:14px 18px; border:0; border-radius:13px; background:var(--blue); color:#fff; font:inherit; font-weight:800; cursor:pointer; }
+    .primary:hover { background:#263d68; }
+    .message { min-height:1.5em; margin:10px 0 0; color:var(--danger); font-size:.92rem; }
+    .result-empty { display:grid; place-items:center; min-height:300px; color:#dbe4f1; text-align:center; }
+    .result-ready { display:none; }
+    .result-ready.show { display:block; }
+    .result-empty.hide { display:none; }
+    .score { display:flex; align-items:end; gap:10px; margin:18px 0 12px; }
+    .score strong { font-size:3.5rem; line-height:1; color:var(--gold); }
+    .score span { padding-bottom:4px; color:#dbe4f1; }
+    .check-list { display:grid; gap:9px; margin:20px 0; padding:0; list-style:none; }
+    .check-list li { padding:11px 13px; border:1px solid rgba(255,255,255,.18); border-radius:12px; background:rgba(255,255,255,.07); }
+    .check-list li.ok::before { content:"✓ "; color:var(--gold); font-weight:900; }
+    .check-list li.todo::before { content:"○ "; color:#b8c6d9; font-weight:900; }
+    .compare { padding:15px; border-radius:15px; background:#24385f; color:#e9eff8; }
+    .compare strong { color:var(--gold); }
+    .bars { display:grid; gap:12px; margin-top:15px; }
+    .bar-row { display:grid; grid-template-columns:52px 1fr 58px; align-items:center; gap:10px; font-size:.84rem; }
+    .bar-row > span { color:#dbe4f1; }
+    .bar-row > strong { color:#fff; text-align:right; }
+    .bar { height:9px; overflow:hidden; border-radius:999px; background:rgba(255,255,255,.16); }
+    .bar i { display:block; height:100%; border-radius:inherit; background:var(--gold); }
+    .bar-row:last-child i { background:#9bd3bd; }
+    .copy { width:100%; padding:12px 15px; border:1px solid rgba(255,255,255,.45); border-radius:12px; background:transparent; color:#fff; font:inherit; font-weight:800; cursor:pointer; }
+    .copy:hover { background:rgba(255,255,255,.1); }
+    .generated { width:100%; min-height:170px; margin-top:14px; padding:13px; border:1px solid rgba(255,255,255,.25); border-radius:13px; background:#14213a; color:#fff; font:inherit; font-size:.93rem; line-height:1.5; }
+    .how { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:24px; }
+    .how article { padding:21px; border-top:3px solid var(--gold); border-radius:16px; background:#fff; }
+    .how b { display:block; margin-bottom:5px; }
+    .how p { margin:0; color:var(--muted); }
+    footer { padding:24px 20px 40px; color:var(--muted); text-align:center; font-size:.9rem; }
+    @media (max-width:800px) { .workspace { grid-template-columns:1fr; } .how { grid-template-columns:1fr; } .proof-grid { grid-template-columns:1fr; } main { padding-top:38px; } .topbar { align-items:flex-start; flex-direction:column; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="back" href="../index.html"><span class="brand-mark">PC</span> 서효상 포트폴리오</a>
+    <span class="badge">BR-B · 논문 반영 애플리케이션</span>
+  </header>
+  <main>
+    <section aria-labelledby="title">
+      <p class="eyebrow">10번 논문을 실제 도구로 바꾸기</p>
+      <h1 id="title">프롬프트 체크메이트</h1>
+      <p class="lead">이 앱은 AI로 코드를 만들려는 사람이 문제 설명과 명시적 테스트를 포함한 구체적인 프롬프트를 작성하도록 돕습니다.</p>
+      <div class="paper-note">
+        <span><strong>논문</strong> 프롬프트의 구체성이 AI 생성 코드의 정확도에 미치는 영향</span>
+        <span><strong>핵심 결과</strong> 구체적 프롬프트 72.38% · 일반 프롬프트 63.49%</span>
+      </div>
+      <div class="proof-grid" aria-label="앱 핵심 정보">
+        <div class="proof"><strong>+8.89%p</strong><span>논문에서 관찰한 차이</span></div>
+        <div class="proof"><strong>3단계</strong><span>문제 · 조건 · 테스트</span></div>
+        <div class="proof"><strong>저장 없음</strong><span>입력 내용은 브라우저에 저장하지 않음</span></div>
+      </div>
+    </section>
+
+    <section class="workspace" aria-label="프롬프트 점검 작업 공간">
+      <form id="promptForm" class="card form-card" novalidate>
+        <div class="form-toolbar"><span class="step-label">실전 작성 화면</span><div class="toolbar-actions"><button id="exampleButton" class="ghost" type="button">예시 다시 보기</button><button id="resetButton" class="ghost" type="button">새로 작성</button></div></div>
+        <h2>프롬프트를 세 칸으로 구체화하세요</h2>
+        <p class="card-intro">처음 열면 예시가 자동으로 표시됩니다. 세 가지를 채우면 AI에게 바로 전달할 수 있는 요청문으로 정리됩니다.</p>
+        <div class="field">
+          <label for="goal">1. 문제와 목표 <span>무엇을 만들고 왜 필요한가요?</span></label>
+          <textarea id="goal" maxlength="1200" placeholder="예: 병원 예약 데이터를 확인하는 작은 웹 앱을 만들고 싶습니다."></textarea>
+        </div>
+        <div class="field">
+          <label for="requirements">2. 요구사항과 제약 <span>입력, 출력, 기술 조건을 적어 보세요.</span></label>
+          <textarea id="requirements" maxlength="1600" placeholder="예: 모바일에서 읽기 쉬워야 하고, 개인정보는 저장하지 않습니다."></textarea>
+        </div>
+        <div class="field">
+          <label for="tests">3. 확인할 테스트 <span>무엇이 되면 완료인가요?</span></label>
+          <textarea id="tests" maxlength="1600" placeholder="예: 빈 입력을 넣어도 안내 문구가 나오고, 정상 입력이면 결과가 표시됩니다."></textarea>
+        </div>
+        <div class="form-actions"><button class="primary" type="submit">프롬프트 점검하기</button></div>
+        <p id="message" class="message" role="alert" aria-live="polite"></p>
+      </form>
+
+      <aside class="card result-card" aria-live="polite">
+        <div id="resultEmpty" class="result-empty">
+          <div><strong>아직 점검 전입니다.</strong><br>왼쪽 세 칸을 채우고 버튼을 눌러 보세요.</div>
+        </div>
+        <div id="resultReady" class="result-ready">
+          <h2>구체화 점검 결과</h2>
+          <p id="resultSummary" class="card-intro"></p>
+          <div class="score"><strong id="scoreValue">0</strong><span>/ 100점<br>작성 구조 점검</span></div>
+          <ul id="checkList" class="check-list"></ul>
+          <div class="compare">논문에서 관찰한 통과율<br><strong>63.49% → 72.38%</strong> <span>(+8.89%p)</span><div class="bars"><div class="bar-row"><span>일반</span><div class="bar"><i style="width:63.49%"></i></div><strong>63.49%</strong></div><div class="bar-row"><span>구체적</span><div class="bar"><i style="width:72.38%"></i></div><strong>72.38%</strong></div></div></div>
+          <textarea id="generatedPrompt" class="generated" readonly aria-label="정리된 프롬프트"></textarea>
+          <button id="copyButton" class="copy" type="button">정리된 프롬프트 복사</button>
+        </div>
+      </aside>
+    </section>
+
+    <section class="how" aria-label="사용 방법">
+      <article><b>01 · 문제를 적기</b><p>누가 어떤 문제를 해결하려는지 한 문장으로 씁니다.</p></article>
+      <article><b>02 · 조건을 적기</b><p>필요한 기능과 지켜야 할 제한을 구체적으로 씁니다.</p></article>
+      <article><b>03 · 테스트하기</b><p>정상 입력과 빈 입력에서 어떤 결과가 나와야 하는지 확인합니다.</p></article>
+    </section>
+  </main>
+  <footer>논문의 결과를 예측기로 과장하지 않고, 구체적인 요청과 테스트를 만드는 작성 방법으로 적용했습니다.</footer>
+  <script>
+    const form = document.getElementById('promptForm');
+    const fields = [
+      { id: 'goal', label: '문제와 목표' },
+      { id: 'requirements', label: '요구사항과 제약' },
+      { id: 'tests', label: '확인할 테스트' }
+    ];
+    const empty = document.getElementById('resultEmpty');
+    const ready = document.getElementById('resultReady');
+    const message = document.getElementById('message');
+    const list = document.getElementById('checkList');
+    const generated = document.getElementById('generatedPrompt');
+
+    function escapeHtml(value) {
+      return value.replace(/[&<>"']/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[char]));
+    }
+
+    function renderResult(values) {
+      const score = Math.min(100, 30 + 35 + 35);
+      document.getElementById('scoreValue').textContent = score;
+      document.getElementById('resultSummary').textContent = '문제, 조건, 테스트가 모두 들어 있어 AI가 확인할 기준이 분명합니다.';
+      list.innerHTML = fields.map(field => '<li class="ok">' + escapeHtml(field.label) + '이(가) 작성되었습니다.</li>').join('');
+      generated.value = [
+        '문제와 목표', values.goal,
+        '', '요구사항과 제약', values.requirements,
+        '', '확인할 테스트', values.tests
+      ].join('\n');
+      empty.classList.add('hide');
+      ready.classList.add('show');
+    }
+
+    function checkPrompt(event) {
+      event.preventDefault();
+      const values = Object.fromEntries(fields.map(field => [field.id, document.getElementById(field.id).value.trim()]));
+      const missing = fields.filter(field => !values[field.id]);
+      if (missing.length) {
+        message.textContent = missing.map(field => field.label).join(', ') + ' 내용을 먼저 적어 주세요.';
+        document.getElementById(missing[0].id).focus();
+        return;
+      }
+      message.textContent = '';
+      message.style.color = '';
+      renderResult(values);
+    }
+
+    function loadExample() {
+      const example = {
+        goal: '초보자가 AI에게 웹 앱을 만들어 달라고 요청할 때, 빠뜨린 조건 때문에 결과를 다시 고치는 시간을 줄이고 싶습니다.',
+        requirements: '모바일에서도 읽기 쉬운 한 화면 앱으로 만들고, 입력 내용은 저장하지 않습니다. 문제 설명, 필요한 기능, 제한 조건을 분리해서 보여 줍니다.',
+        tests: '세 칸을 모두 작성하면 100점 결과와 정리된 프롬프트가 표시되어야 합니다. 한 칸을 비우고 점검하면 앱이 멈추지 않고 작성 안내가 보여야 합니다.'
+      };
+      fields.forEach(field => { document.getElementById(field.id).value = example[field.id]; });
+      message.style.color = '';
+      message.textContent = '논문의 결과를 적용한 예시를 불러왔습니다.';
+      renderResult(example);
+    }
+
+    function resetForm() {
+      fields.forEach(field => { document.getElementById(field.id).value = ''; });
+      message.style.color = '';
+      message.textContent = '새 내용을 입력해 보세요.';
+      empty.classList.remove('hide');
+      ready.classList.remove('show');
+      generated.value = '';
+    }
+
+    async function copyPrompt() {
+      const text = generated.value;
+      try {
+        await navigator.clipboard.writeText(text);
+        message.style.color = '#2f765b';
+        message.textContent = '정리된 프롬프트를 복사했습니다.';
+      } catch (error) {
+        generated.focus();
+        generated.select();
+        document.execCommand('copy');
+        message.style.color = '#2f765b';
+        message.textContent = '프롬프트를 선택했습니다. Ctrl+C로 복사해 주세요.';
+      }
+    }
+
+    form.addEventListener('submit', checkPrompt);
+    document.getElementById('exampleButton').addEventListener('click', loadExample);
+    document.getElementById('resetButton').addEventListener('click', resetForm);
+    document.getElementById('copyButton').addEventListener('click', copyPrompt);
+    loadExample();
+  </script>
+</body>
+</html>
