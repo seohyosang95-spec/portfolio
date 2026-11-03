@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="프롬프트 체크메이트 앱을 만든 과정을 시간순으로 재생하는 기록 장치">
+  <title>기록 재생 장치 | 프롬프트 체크메이트</title>
+  <style>
+    :root { --ink:#17233a; --muted:#657188; --paper:#f5f7fb; --panel:#fff; --line:#dce2ea; --blue:#1b2a4a; --gold:#f5c45c; --mint:#dcefe8; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; background:var(--paper); color:var(--ink); font-family:system-ui,-apple-system,"Segoe UI","Malgun Gothic",sans-serif; line-height:1.6; }
+    a { color:inherit; }
+    .topbar { display:flex; justify-content:space-between; gap:18px; align-items:center; padding:18px max(20px,calc((100% - 1080px)/2)); background:var(--blue); color:#fff; }
+    .back { text-decoration:none; font-weight:800; }
+    .back span { display:inline-grid; place-items:center; width:30px; height:30px; margin-right:7px; border-radius:9px; background:var(--gold); color:var(--blue); font-size:.78rem; }
+    .topbar small { color:#d8e0f2; }
+    main { width:min(1080px,calc(100% - 32px)); margin:0 auto; padding:54px 0 70px; }
+    .eyebrow { color:var(--muted); font-size:.8rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; }
+    h1 { max-width:720px; margin:10px 0 12px; font-size:clamp(2rem,5vw,4.2rem); line-height:1.08; letter-spacing:-.06em; }
+    .lead { max-width:700px; margin:0; color:var(--muted); font-size:1.1rem; }
+    .device { display:grid; grid-template-columns:1.08fr .92fr; gap:22px; margin-top:34px; }
+    .panel { padding:26px; border:1px solid var(--line); border-radius:22px; background:var(--panel); box-shadow:0 12px 36px rgba(23,35,58,.06); }
+    .panel h2 { margin:0 0 8px; font-size:1.25rem; }
+    .panel p { margin:0; color:var(--muted); }
+    .stage { min-height:300px; display:flex; flex-direction:column; justify-content:space-between; background:linear-gradient(145deg,#fff,#fff8e9); }
+    .stage-number { color:#9b771d; font-weight:900; font-size:3.3rem; line-height:1; }
+    .stage-date { color:var(--muted); font-size:.9rem; }
+    .stage h2 { margin-top:20px; font-size:1.7rem; }
+    .stage-copy { min-height:82px; }
+    .progress { height:8px; margin-top:22px; overflow:hidden; border-radius:99px; background:#e9edf3; }
+    .progress i { display:block; height:100%; width:0; border-radius:inherit; background:var(--gold); transition:width .35s ease; }
+    .steps { display:grid; gap:12px; }
+    .step { display:grid; grid-template-columns:36px 1fr; gap:12px; align-items:start; padding:14px; border:1px solid var(--line); border-radius:15px; background:#fbfcfe; }
+    .step b { display:grid; place-items:center; width:30px; height:30px; border-radius:50%; background:#e9edf3; color:var(--muted); font-size:.85rem; }
+    .step.active { border-color:var(--gold); background:#fffaf0; }
+    .step.active b { background:var(--gold); color:var(--blue); }
+    .step strong { display:block; }
+    .step span { display:block; margin-top:2px; color:var(--muted); font-size:.9rem; }
+    .controls { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+    button { border:1px solid var(--line); border-radius:12px; padding:11px 15px; background:#fff; color:var(--ink); font:inherit; font-weight:800; cursor:pointer; }
+    button.primary { border-color:var(--blue); background:var(--blue); color:#fff; }
+    button:hover, button:focus-visible { transform:translateY(-1px); box-shadow:0 5px 12px rgba(23,35,58,.12); }
+    .note { margin-top:22px; padding:15px 17px; border-left:4px solid var(--gold); border-radius:10px; background:var(--mint); color:#35584d; }
+    footer { padding:22px; color:var(--muted); text-align:center; font-size:.9rem; }
+    @media (max-width:800px) { .topbar { align-items:flex-start; flex-direction:column; } .device { grid-template-columns:1fr; } main { padding-top:38px; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="back" href="index.html"><span>PC</span> 프롬프트 체크메이트</a>
+    <small>앱 제작 과정을 다시 보는 장치</small>
+  </header>
+  <main>
+    <div class="eyebrow">BR-B · 기록 재생 장치</div>
+    <h1>앱이 만들어진 과정을 한 장면씩 재생합니다.</h1>
+    <p class="lead">논문의 결과를 실제 입력 도구로 바꾼 과정을 시간순으로 확인할 수 있습니다. 저장·로그인 없이 브라우저에서만 동작합니다.</p>
+
+    <section class="device" aria-label="기록 재생 장치">
+      <article class="panel stage">
+        <div>
+          <div class="stage-number" id="stageNumber">01</div>
+          <div class="stage-date" id="stageDate">기획 · 논문 결과 선택</div>
+          <h2 id="stageTitle">논문의 차이를 앱의 기준으로 정했습니다.</h2>
+          <p class="stage-copy" id="stageCopy">일반 프롬프트 63.49%와 구체적 프롬프트 72.38%의 차이 8.89%p를 앱의 핵심 근거로 삼았습니다.</p>
+        </div>
+        <div>
+          <div class="progress" aria-label="재생 진행률"><i id="progressBar"></i></div>
+          <div class="controls">
+            <button class="primary" id="playButton" type="button">▶ 재생</button>
+            <button id="prevButton" type="button">← 이전</button>
+            <button id="nextButton" type="button">다음 →</button>
+            <button id="resetButton" type="button">처음부터</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel">
+        <h2>제작 기록</h2>
+        <p>재생 버튼을 누르거나 원하는 기록을 직접 선택해 보세요.</p>
+        <div class="steps" id="steps" style="margin-top:18px"></div>
+        <div class="note">이 장치는 앱 사용자의 입력을 저장하지 않고, 앱을 만든 판단과 확인 과정을 보여 주는 공개 기록입니다.</div>
+      </article>
+    </section>
+  </main>
+  <footer>프롬프트 체크메이트 · 논문 결과를 실제 도구로 바꾼 기록</footer>
+  <script>
+    const records = [
+      { date:'기획 · 논문 결과 선택', title:'논문의 차이를 앱의 기준으로 정했습니다.', copy:'일반 프롬프트 63.49%와 구체적 프롬프트 72.38%의 차이 8.89%p를 앱의 핵심 근거로 삼았습니다.' },
+      { date:'구조 · 사용자의 세 가지 행동', title:'문제·조건·테스트 세 칸으로 줄였습니다.', copy:'처음 온 사람도 설명 없이 문제와 목표, 요구사항과 제약, 확인할 테스트를 순서대로 적게 했습니다.' },
+      { date:'첫 판 · 예시와 결과', title:'예시를 먼저 보여 주고 바로 써 보게 했습니다.', copy:'처음 열면 예시 입력과 100점 결과, 논문 수치 비교, 정리된 프롬프트가 한 화면에 표시됩니다.' },
+      { date:'검증 · 잘못된 입력', title:'빈 입력에도 멈추지 않게 확인했습니다.', copy:'한 칸을 비우고 점검해도 오류 화면 대신 작성 안내가 표시되도록 만들었습니다.' },
+      { date:'완성 · 공개와 피드백', title:'포트폴리오에 연결하고 동료 피드백을 남겼습니다.', copy:'GitHub Pages에 공개하고, 앱 사용 후 받은 한 줄 감상을 사용자 피드백 카드에 추가했습니다.' }
+    ];
+    let current = 0;
+    let timer = null;
+    const $ = (id) => document.getElementById(id);
+    function render() {
+      const item = records[current];
+      $('stageNumber').textContent = String(current + 1).padStart(2,'0');
+      $('stageDate').textContent = item.date;
+      $('stageTitle').textContent = item.title;
+      $('stageCopy').textContent = item.copy;
+      $('progressBar').style.width = `${((current + 1) / records.length) * 100}%`;
+      document.querySelectorAll('.step').forEach((node, index) => node.classList.toggle('active', index === current));
+    }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } $('playButton').textContent = '▶ 재생'; }
+    function play() { if (timer) { stop(); return; } $('playButton').textContent = 'Ⅱ 일시정지'; timer = setInterval(() => { current = (current + 1) % records.length; render(); }, 4200); }
+    records.forEach((item, index) => {
+      const node = document.createElement('button');
+      node.className = 'step';
+      node.type = 'button';
+      node.innerHTML = `<b>${String(index + 1).padStart(2,'0')}</b><span><strong>${item.date}</strong>${item.title}</span>`;
+      node.addEventListener('click', () => { stop(); current = index; render(); });
+      $('steps').appendChild(node);
+    });
+    $('playButton').addEventListener('click', play);
+    $('prevButton').addEventListener('click', () => { stop(); current = (current - 1 + records.length) % records.length; render(); });
+    $('nextButton').addEventListener('click', () => { stop(); current = (current + 1) % records.length; render(); });
+    $('resetButton').addEventListener('click', () => { stop(); current = 0; render(); });
+    render();
+  </script>
+</body>
+</html>
